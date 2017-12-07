@@ -1,4 +1,12 @@
-﻿
+﻿/*
+
+@Name：不落阁后台模板源码 
+@Author：Absolutely 
+@Site：http://www.lyblogs.cn
+
+*/
+
+
 layui.define('jquery', function (exports) {
     var $ = layui.jquery;
     function pagesize(id, pageSize) {

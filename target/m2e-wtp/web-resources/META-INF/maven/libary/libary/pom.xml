@@ -1,12 +1,12 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-  xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
-  <modelVersion>4.0.0</modelVersion>
-  <groupId>libary</groupId>
-  <artifactId>libary</artifactId>
-  <version>0.0.1-SNAPSHOT</version>
-  <name>libary Maven Webapp</name>
-  <packaging>war</packaging>
-  <!-- 版本设置 -->
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<groupId>libary</groupId>
+	<artifactId>libary</artifactId>
+	<version>0.0.1-SNAPSHOT</version>
+	<name>libary Maven Webapp</name>
+	<packaging>war</packaging>
+	<!-- 版本设置 -->
 	<properties>
 		<mybatis.version>3.4.5</mybatis.version>
 		<spring.version>5.0.0.RELEASE</spring.version>
@@ -154,16 +154,33 @@
 			<version>4.0.0</version>
 			<scope>provided</scope>
 		</dependency>
-		
+
 		<!-- jstl标签库 -->
 		<dependency>
-            <groupId>javax.servlet</groupId>
-            <artifactId>jstl</artifactId>
-            <version>1.2</version>
-        </dependency>
-		
-  </dependencies>
-  <build>
-    <finalName>libary</finalName>
-  </build>
+			<groupId>javax.servlet</groupId>
+			<artifactId>jstl</artifactId>
+			<version>1.2</version>
+		</dependency>
+		<!-- json -->
+		<dependency>
+			<groupId>com.fasterxml.jackson.core</groupId>
+			<artifactId>jackson-core</artifactId>
+			<version>2.9.2</version>
+		</dependency>
+		<dependency>
+			<groupId>com.fasterxml.jackson.core</groupId>
+			<artifactId>jackson-databind</artifactId>
+			<version>2.9.2</version>
+		</dependency>
+		<dependency>
+			<groupId>com.fasterxml.jackson.core</groupId>
+			<artifactId>jackson-annotations</artifactId>
+			<version>2.9.2</version>
+		</dependency>
+
+
+	</dependencies>
+	<build>
+		<finalName>libary</finalName>
+	</build>
 </project>

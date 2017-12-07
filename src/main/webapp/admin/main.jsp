@@ -16,8 +16,10 @@
     <link href="${myCss}/animate.min.css" rel="stylesheet" />
     <!-- 本页样式 -->
     <link href="${myCss}/main.css" rel="stylesheet" />
-    
-    <script type="text/javascript" src="${myJs }/main.js"></script>
+    <!-- 本页JS -->
+    <script src="${plugin}/layui/layui.js"></script>
+    <script src="${myJs }/main.js"></script>
+    <script src="${myJs }/pagesize.js"></script>
 </head>
 <body>
     <div class="layui-layout layui-layout-admin">
@@ -53,16 +55,16 @@
             </ul>
         </div>
         <!--侧边导航-->
-        <div class="layui-side">
+        <div class="layui-side layui-bg-black">
             <div class="layui-side-scroll">
-                <ul class="layui-nav layui-nav-tree" lay-filter="leftnav">
-                    <li class="layui-nav-item layui-this">
+               <ul class="layui-nav layui-nav-tree"  lay-filter="test">
+                   <li class="layui-nav-item layui-nav-itemed">
                         <a href="javascript:;"><i class="fa fa-home"></i>首页</a>
                     </li>
-                    <li class="layui-nav-item">
+                    <li class="layui-nav-item layui-nav-itemed">
                         <a href="javascript:;"><i class="fa fa-file-text"></i>内容管理</a>
                         <dl class="layui-nav-child">
-                            <dd><a href="javascript:;" data-url="datalist.html" data-id="1">图书管理</a></dd>
+                            <dd><a href="booklist.jsp" data-url="booklist.jsp">图书管理</a></dd>
                             <dd><a href="javascript:;" data-url="datalist.html" data-id="2">资源管理</a></dd>
                             <dd><a href="javascript:;" data-url="datalist.html" data-id="3">时光轴管理</a></dd>
                             <dd><a href="javascript:;">笔记本管理</a></dd>
@@ -88,7 +90,7 @@
                             <dd><a href="javascript:;" data-url="datalist.jsp" data-id="7">留言管理</a></dd>
                         </dl>
                     </li>
-                    <li class="layui-nav-item">
+                   <li class="layui-nav-item">
                         <a href="javascript:;"><i class="fa fa-cog"></i>系统配置</a>
                         <dl class="layui-nav-child">
                             <dd><a href="javascript:;">SEO配置</a></dd>
@@ -120,9 +122,9 @@
                     <div class="layui-tab-item layui-show">
                         <p style="padding: 10px 15px; margin-bottom: 20px; margin-top: 10px; border:1px solid #ddd;display:inline-block;">
                             上次登陆
-                            <span style="padding-left:1em;">IP：192.168.1.101</span>
-                            <span style="padding-left:1em;">地点：四川成都</span>
-                            <span style="padding-left:1em;">时间：2017-3-26 14：12</span>
+                            <span style="padding-left:1em;">IP：${userSession.getHost()}</span>
+                            <span style="padding-left:1em;">地点：河南郑州</span>
+                            <span style="padding-left:1em;">时间：2017-11-26 14：12</span>
                         </p>
                         <fieldset class="layui-elem-field layui-field-title">
                             <legend>统计信息</legend>
@@ -245,13 +247,5 @@
             </div>
         </div>
     </div>
-    <!-- layui.js -->
-    <script src="${plugin}/layui/layui.js"></script>
-    <!-- layui规范化用法 -->
-    <script type="text/javascript">
-        layui.config({
-            base: '../js/'
-        }).use('main');
-    </script>
 </body>
 </html>

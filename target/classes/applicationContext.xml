@@ -59,21 +59,29 @@
 	    <!-- Shiro的核心安全接口,这个属性是必须的 -->  
 	    <property name="securityManager" ref="securityManager"/>
 	    <!-- 身份认证失败，则跳转到登录页面的配置 -->  
-	    <property name="loginUrl" value="/admin/index.jsp"/>
+	    <property name="loginUrl" value="/admin/login.jsp"/>
 	    <!-- 权限认证失败，则跳转到指定页面 -->  
-	    <property name="unauthorizedUrl" value="/unauthor.jsp"/>  
+	    <property name="unauthorizedUrl" value="/unauthorized.jsp"/>  
 	    <!-- Shiro连接约束配置,即过滤链的定义 -->  
 	    <property name="filterChainDefinitions">  
-	        <value>  
-	             /admin/toLogin.do = anon
-	             /admin/toMain.do = authc
-	             /user/login.do = anon
-	             /user/regist.do = anon
-	             /book/list.do=authc
-	             /student/*.do=authc
-	             /admin/*.do=roles["admin"]
-				/student/*.do=roles["student","admin"]
-				/book/list=perms["图书查看"]
+	        <value> 
+	           /user/login.do = anon
+	           /user/regist.do = anon
+	           /admin/login.jsp = anon
+	           /admin/main.jsp = authc
+	           #图书权限
+	           /book/list.do** = perms["图书查看"]
+	           /book/detail.do = roles["admin,student,guest"]
+	           /book/add.do = roles["admin"]
+	           /book/delete.do = roles["admin"]
+	           /book/update.do = roles["admin"]
+	           #管理用户权限
+	           /user/update.do = roles["admin,student"]
+	           /user/detail.do = roles["admin,student"]
+	           /user/list.do = roles["admin"]
+	           /user/delete.do = roles["admin"]
+	           /user/update.do = roles["admin"]
+	           /user/add.do = roles["admin"]
 	        </value>  
 	    </property>
 	</bean>  
