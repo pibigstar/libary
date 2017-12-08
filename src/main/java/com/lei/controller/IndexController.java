@@ -4,17 +4,12 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
-@RequestMapping("admin")
+@RequestMapping("/portal")
 public class IndexController {
 
-	@RequestMapping(value = "toLogin")
+	@RequestMapping(params = "toIndex")
 	public String toLogin() {
 		return "index";
-		
-	}
-	@RequestMapping(value = "toMain")
-	public String toMain() {
-		return "main";
 	}
 	
 }

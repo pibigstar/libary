@@ -2,6 +2,7 @@ package com.lei.controller;
 
 import java.io.IOException;
 
+import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
@@ -17,12 +18,16 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.alibaba.fastjson.JSON;
 import com.lei.entity.User;
 import com.lei.model.JSONModel;
+import com.lei.service.UserServiceI;
 
 @Controller
 @RequestMapping("/user")
 public class UserController {
 	
-	@RequestMapping("login")
+	@Resource
+	private UserServiceI userService;
+	
+	@RequestMapping(params = "login")
 	public void login(User user,HttpServletRequest request,HttpServletResponse response) throws IOException {
 		//return "redirect:toLogin.do";
 		JSONModel j = new JSONModel();
@@ -36,6 +41,8 @@ public class UserController {
 			subject.login(token);
 			//登录成后，会将登录者的信息存到session中，登录失败则会进到catch
 			Session session = subject.getSession();
+			User exitUser = userService.findUserByUserName(user.getUsername());
+			session.setAttribute("user", exitUser);
 			request.setAttribute("userSession", session);
 			j.setSuccess(true);
 			j.setMsg("登录成功！");
@@ -47,6 +54,10 @@ public class UserController {
 			j.setMsg("用户名或密码错误");
 			response.getWriter().write(JSON.toJSONString(j));
 		}
+	}
+	@RequestMapping(params = "toLogin")
+	public String toLogin() {
+		return "page/login/login";
 	}
 
 }

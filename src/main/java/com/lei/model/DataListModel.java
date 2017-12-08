@@ -4,7 +4,7 @@ public class DataListModel {
 	private int code;
 	private String msg;
 	private int count;
-	private Object object;
+	private Object data;
 	public int getCode() {
 		return code;
 	}
@@ -23,12 +23,13 @@ public class DataListModel {
 	public void setCount(int count) {
 		this.count = count;
 	}
-	public Object getObject() {
-		return object;
+	public Object getData() {
+		return data;
 	}
-	public void setObject(Object object) {
-		this.object = object;
+	public void setData(Object data) {
+		this.data = data;
 	}
+	
 	
 
 }

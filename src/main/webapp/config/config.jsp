@@ -11,7 +11,8 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 <c:set var="myJs"  value="${pageContext.request.contextPath}/js" />
 <c:set var="myCss"  value="${pageContext.request.contextPath}/css" />
 <c:set var="myImages"  value="${pageContext.request.contextPath}/images" />
-<c:set var="plugin"  value="${pageContext.request.contextPath}/plugin" />
+<c:set var="myResource"  value="${pageContext.request.contextPath}/resource" />
+<c:set var="layui"  value="${pageContext.request.contextPath}/layui" />
 <c:set var="qiniu"  value="http://oud3stsjg.bkt.clouddn.com/" />
 
     
