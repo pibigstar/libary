@@ -15,7 +15,6 @@
 	<meta name="format-detection" content="telephone=no">
 	<link rel="icon" href="favicon.ico">
 	<link rel="stylesheet" href="layui/css/layui.css" media="all" />
-	<link rel="stylesheet" href="//at.alicdn.com/t/font_tnyc012u2rlwstt9.css" media="all" />
 	<link rel="stylesheet" href="css/main.css" media="all" />
 </head>
 <body class="main_body">
@@ -79,8 +78,14 @@
 					</li>
 					<li class="layui-nav-item" pc>
 						<a href="javascript:;">
+						<c:if test="${user!=null }">
 							<img src="images/face.jpg" class="layui-circle" width="35" height="35">
 							<cite>${user.username}</cite>
+						</c:if>
+						<c:if test="${user==null }">
+							<img src="images/face.jpg" class="layui-circle" width="35" height="35">
+							<cite>游客</cite>
+						</c:if>
 						</a>
 						<dl class="layui-nav-child">
 							<dd><a href="javascript:;" data-url="page/user/userInfo.html"><i class="iconfont icon-zhanghu" data-icon="icon-zhanghu"></i><cite>个人资料</cite></a></dd>
@@ -96,7 +101,13 @@
 		<div class="layui-side layui-bg-black">
 			<div class="user-photo">
 				<a class="img" title="我的头像" ><img src="images/face.jpg"></a>
-				<p>你好！<span class="userName">请叫我马哥</span>, 欢迎登录</p>
+				<c:if test="${user!=null }">
+					<p>你好！<span class="userName">${user.username }</span>, 欢迎登录</p>
+				</c:if>
+				<c:if test="${user==null }">
+					<p>你好！<span class="userName">游客</span>, 欢迎登录</p>
+				</c:if>
+				
 			</div>
 			<div class="navBar layui-side-scroll">
 				<ul class="layui-nav layui-nav-tree">
@@ -170,7 +181,7 @@
 		</div>
 		<!-- 底部 -->
 		<div class="layui-footer footer">
-			<p>copyright @2017 请叫我马哥　　<a onclick="donation()" class="layui-btn layui-btn-danger layui-btn-small">捐赠作者</a></p>
+			<p>copyright @2017 派大星       <a onclick="donation()" class="layui-btn layui-btn-danger layui-btn-small">捐赠作者</a></p>
 		</div>
 	</div>
 	

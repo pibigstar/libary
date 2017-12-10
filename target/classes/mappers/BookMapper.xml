@@ -6,13 +6,15 @@
     <result column="name" property="name" jdbcType="VARCHAR" />
     <result column="author" property="author" jdbcType="VARCHAR" />
     <result column="book_desc" property="bookDesc" jdbcType="VARCHAR" />
+    <result column="tips" property="tips" jdbcType="VARCHAR" />
+    <result column="look_per" property="lookPer" jdbcType="VARCHAR" />
     <result column="state" property="state" jdbcType="VARCHAR" />
     <result column="delete_flag" property="deleteFlag" jdbcType="VARCHAR" />
-    <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
-    <result column="update_time" property="updateTime" jdbcType="TIMESTAMP" />
+    <result column="create_time" property="createTime" jdbcType="VARCHAR" />
+    <result column="update_time" property="updateTime" jdbcType="VARCHAR" />
   </resultMap>
   <sql id="Base_Column_List" >
-    id, name, author, book_desc, state, delete_flag, create_time, update_time
+    id, name, author, book_desc, tips, look_per, state, delete_flag, create_time, update_time
   </sql>
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
     select 
@@ -21,12 +23,22 @@
     where id = #{id,jdbcType=VARCHAR}
   </select>
   
-  <select id="getList" resultMap="BaseResultMap" >
+    <select id="getBooksByName" resultMap="BaseResultMap" parameterType="java.lang.String" >
     select 
     <include refid="Base_Column_List" />
     from t_books
+    where name like concat(concat('%', #{name}), '%')
   </select>
   
+  <select id="getList" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from t_books limit #{page},10
+  </select>
+  
+  <select id="count" resultType="java.lang.Integer" >
+    select count(*) from t_books
+  </select>
   
   <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
     delete from t_books
@@ -34,11 +46,13 @@
   </delete>
   <insert id="insert" parameterType="com.lei.entity.Book" >
     insert into t_books (id, name, author, 
-      book_desc, state, delete_flag, 
-      create_time, update_time)
+      book_desc, tips, look_per, 
+      state, delete_flag, create_time, 
+      update_time)
     values (#{id,jdbcType=VARCHAR}, #{name,jdbcType=VARCHAR}, #{author,jdbcType=VARCHAR}, 
-      #{bookDesc,jdbcType=VARCHAR}, #{state,jdbcType=VARCHAR}, #{deleteFlag,jdbcType=VARCHAR}, 
-      #{createTime,jdbcType=TIMESTAMP}, #{updateTime,jdbcType=TIMESTAMP})
+      #{bookDesc,jdbcType=VARCHAR}, #{tips,jdbcType=VARCHAR}, #{lookPer,jdbcType=VARCHAR}, 
+      #{state,jdbcType=VARCHAR}, #{deleteFlag,jdbcType=VARCHAR}, #{createTime,jdbcType=VARCHAR}, 
+      #{updateTime,jdbcType=VARCHAR})
   </insert>
   <insert id="insertSelective" parameterType="com.lei.entity.Book" >
     insert into t_books
@@ -54,6 +68,12 @@
       </if>
       <if test="bookDesc != null" >
         book_desc,
+      </if>
+      <if test="tips != null" >
+        tips,
+      </if>
+      <if test="lookPer != null" >
+        look_per,
       </if>
       <if test="state != null" >
         state,
@@ -81,6 +101,12 @@
       <if test="bookDesc != null" >
         #{bookDesc,jdbcType=VARCHAR},
       </if>
+      <if test="tips != null" >
+        #{tips,jdbcType=VARCHAR},
+      </if>
+      <if test="lookPer != null" >
+        #{lookPer,jdbcType=VARCHAR},
+      </if>
       <if test="state != null" >
         #{state,jdbcType=VARCHAR},
       </if>
@@ -88,10 +114,10 @@
         #{deleteFlag,jdbcType=VARCHAR},
       </if>
       <if test="createTime != null" >
-        #{createTime,jdbcType=TIMESTAMP},
+        #{createTime,jdbcType=VARCHAR},
       </if>
       <if test="updateTime != null" >
-        #{updateTime,jdbcType=TIMESTAMP},
+        #{updateTime,jdbcType=VARCHAR},
       </if>
     </trim>
   </insert>
@@ -107,6 +133,12 @@
       <if test="bookDesc != null" >
         book_desc = #{bookDesc,jdbcType=VARCHAR},
       </if>
+      <if test="tips != null" >
+        tips = #{tips,jdbcType=VARCHAR},
+      </if>
+      <if test="lookPer != null" >
+        look_per = #{lookPer,jdbcType=VARCHAR},
+      </if>
       <if test="state != null" >
         state = #{state,jdbcType=VARCHAR},
       </if>
@@ -114,10 +146,10 @@
         delete_flag = #{deleteFlag,jdbcType=VARCHAR},
       </if>
       <if test="createTime != null" >
-        create_time = #{createTime,jdbcType=TIMESTAMP},
+        create_time = #{createTime,jdbcType=VARCHAR},
       </if>
       <if test="updateTime != null" >
-        update_time = #{updateTime,jdbcType=TIMESTAMP},
+        update_time = #{updateTime,jdbcType=VARCHAR},
       </if>
     </set>
     where id = #{id,jdbcType=VARCHAR}
@@ -127,10 +159,12 @@
     set name = #{name,jdbcType=VARCHAR},
       author = #{author,jdbcType=VARCHAR},
       book_desc = #{bookDesc,jdbcType=VARCHAR},
+      tips = #{tips,jdbcType=VARCHAR},
+      look_per = #{lookPer,jdbcType=VARCHAR},
       state = #{state,jdbcType=VARCHAR},
       delete_flag = #{deleteFlag,jdbcType=VARCHAR},
-      create_time = #{createTime,jdbcType=TIMESTAMP},
-      update_time = #{updateTime,jdbcType=TIMESTAMP}
+      create_time = #{createTime,jdbcType=VARCHAR},
+      update_time = #{updateTime,jdbcType=VARCHAR}
     where id = #{id,jdbcType=VARCHAR}
   </update>
 </mapper>

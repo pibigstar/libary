@@ -17,5 +17,9 @@ public interface BookMapper {
 
     int updateByPrimaryKey(Book record);
 
-	List<Book> getList();
+	List<Book> getList(int page);
+
+	List<Book> getBooksByName(String name);
+
+	int count();
 }

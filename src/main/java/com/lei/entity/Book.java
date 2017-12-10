@@ -11,13 +11,17 @@ public class Book {
 
     private String bookDesc;
 
+    private String tips;
+
+    private String lookPer;
+
     private String state;
 
     private String deleteFlag;
 
-    private Date createTime;
+    private String createTime;
 
-    private Date updateTime;
+    private String updateTime;
 
     public String getId() {
         return id;
@@ -51,6 +55,22 @@ public class Book {
         this.bookDesc = bookDesc == null ? null : bookDesc.trim();
     }
 
+    public String getTips() {
+        return tips;
+    }
+
+    public void setTips(String tips) {
+        this.tips = tips == null ? null : tips.trim();
+    }
+
+    public String getLookPer() {
+        return lookPer;
+    }
+
+    public void setLookPer(String lookPer) {
+        this.lookPer = lookPer == null ? null : lookPer.trim();
+    }
+
     public String getState() {
         return state;
     }
@@ -67,19 +87,21 @@ public class Book {
         this.deleteFlag = deleteFlag == null ? null : deleteFlag.trim();
     }
 
-    public Date getCreateTime() {
-        return createTime;
-    }
+	public String getCreateTime() {
+		return createTime;
+	}
 
-    public void setCreateTime(Date createTime) {
-        this.createTime = createTime;
-    }
+	public void setCreateTime(String createTime) {
+		this.createTime = createTime;
+	}
 
-    public Date getUpdateTime() {
-        return updateTime;
-    }
+	public String getUpdateTime() {
+		return updateTime;
+	}
 
-    public void setUpdateTime(Date updateTime) {
-        this.updateTime = updateTime;
-    }
+	public void setUpdateTime(String updateTime) {
+		this.updateTime = updateTime;
+	}
+
+   
 }

@@ -7,5 +7,11 @@ import com.lei.entity.Book;
 public interface BookService {
 
 	
-	List<Book> listBook();
+	List<Book> listBook(String page);
+
+	List<Book> getBooksByName(String name);
+
+	void addBook(Book book);
+
+	int countBooks();
 }
