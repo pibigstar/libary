@@ -8,7 +8,90 @@ layui.config({
 
 	//加载页面数据
 	var newsData = '';
-	getData(1);
+	 //分页参数设置 这些全局变量关系到分页的功能
+    var startAllAppoint = 1; //开始页码
+    var limitAllAppoint = 10; //每页显示多少条
+    var currentPageAllAppoint = 0;//当前的页码
+    var totalPageAllAppoint = 0;//总页数
+    var dataLength = 0;
+	
+	getData();
+	toPage();
+
+	//得到数据，page 第几页，nums每页显示几个
+	function getData(){
+		$.ajax({
+			url : "book.do?list",
+			type : "get",
+			data :{page:startAllAppoint},
+			dataType : "json",
+			success : function(d){
+				//更新数据
+				renderDate(d.data);
+				totalPageAllAppoint = d.count;//设置总数
+				//currentPageAllAppoint = d.currentPage;//设置当前页数
+			}
+		});
+	}
+	
+	
+	//渲染数据,拼接数据
+	function renderDate(currData){
+		var dataHtml = '';
+		if(currData.length != 0){
+			for(var i=0;i<currData.length;i++){
+				dataHtml += '<tr>'
+		    	+'<td><input type="checkbox" name="checked" lay-skin="primary" lay-filter="choose"></td>'
+		    	+'<td align="left">'+currData[i].id+'</td>'
+		    	+'<td>'+currData[i].name+'</td>'
+		    	+'<td>'+currData[i].author+'</td>'
+		    	+'<td>'+currData[i].bookDesc+'</td>'
+				+'<td>'+currData[i].tips+'</td>';
+				if(currData[i].lookPer == "1"){
+		    		dataHtml += '<td>'+'开放浏览'+'</td>';
+		    	}else if(currData[i].lookPer == "2"){
+		    		dataHtml += '<td style="color:#f00">'+'会员浏览'+'</td>';
+		    	}
+				if(currData[i].state == "1"){
+		    		dataHtml += '<td style="color:green">'+'可借阅'+'</td>';
+		    	}else if(currData[i].state == "2"){
+		    		dataHtml += '<td style="color:blue">'+'已被借阅'+'</td>';
+		    	}else{
+		    		dataHtml += '<td style="color:red">'+'已下架'+'</td>';
+		    	}
+		    	//dataHtml+='<td><input type="checkbox" name="show" lay-skin="switch" lay-text="是|否" lay-filter="isShow"'+currData[i].isShow+'></td>'
+		    	dataHtml+='<td>'+currData[i].createTime+'</td>'
+		    	+'<td>'+currData[i].updateTime+'</td>'
+		    	+'<td>'
+				+  '<a class="layui-btn layui-btn-mini news_edit data-id="'+currData[i].id+'"><i class="iconfont icon-edit"></i>编辑</a>'
+				+  '<a class="layui-btn layui-btn-normal layui-btn-mini news_collect"><i class="layui-icon">&#xe600;</i> 收藏</a>'
+				+  '<a class="layui-btn layui-btn-danger layui-btn-mini news_del" data-id="'+currData[i].id+'"><i class="layui-icon">&#xe640;</i> 删除</a>'
+		        +'</td>'
+		    	+'</tr>';
+			}
+		}else{
+			dataHtml = '<tr><td colspan="12">暂无数据</td></tr>';
+		}
+		$("#content").html(dataHtml);
+		$('.news_list thead input[type="checkbox"]').prop("checked",false);
+	}
+	
+	//分页初始化
+	function toPage(){
+		laypage({
+			cont : "bookPage",
+		    skip: true,
+			pages : 10,
+			jump : function(obj,first){
+				currentPageAllAppoint = obj.curr;
+                startAllAppoint = obj.curr;
+				if(!first){
+					getData();
+				}
+			}
+		});
+	}
+	
 	
 	//查询
 	$(".search_btn").click(function(){
@@ -22,16 +105,45 @@ layui.config({
 					data : {name:name},
 					dataType : "json",
 					success : function(d){
-						var booksData = d.data;
-						newsList(booksData);
+						newsList(d);
 					}
 				});
                 layer.close(index);
-            },2000);
+            },500);
 		}else{
 			layer.msg("请输入需要查询的内容");
 		}
 	})
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 
 	//添加文章
 	//改变窗口大小时，重置弹窗的高度，防止超出可视区域（如F12调出debug的操作）
@@ -180,75 +292,4 @@ layui.config({
 		});
 	})
 	
-	//得到数据，page 第几页，nums每页显示几个
-	function getData(page){
-		$.ajax({
-			url : "book.do?list",
-			type : "get",
-			data :{page:page},
-			dataType : "json",
-			success : function(data){
-				newsList(data);
-			}
-		});
-	}
-	
-	//初始化表格
-	function newsList(data){
-		//分页
-		var pages = data.count;
-		var nums = 10; //每页出现的数据量
-		laypage({
-			cont : "bookPage",
-		    skip: true,
-			//pages : Math.ceil(currDate.length/nums),
-			pages : 10,
-			jump : function(obj){
-				var content = renderDate(data.data);
-				$("#content").html(content);
-				$('.news_list thead input[type="checkbox"]').prop("checked",false);
-		    	form.render();
-			}
-		});
-	}
-	
-	//渲染数据,拼接数据
-	function renderDate(currData){
-		var dataHtml = '';
-		if(currData.length != 0){
-			for(var i=0;i<currData.length;i++){
-				dataHtml += '<tr>'
-		    	+'<td><input type="checkbox" name="checked" lay-skin="primary" lay-filter="choose"></td>'
-		    	+'<td align="left">'+currData[i].id+'</td>'
-		    	+'<td>'+currData[i].name+'</td>'
-		    	+'<td>'+currData[i].author+'</td>'
-		    	+'<td>'+currData[i].bookDesc+'</td>'
-				+'<td>'+currData[i].tips+'</td>';
-				if(currData[i].lookPer == "1"){
-		    		dataHtml += '<td>'+'开放浏览'+'</td>';
-		    	}else if(currData[i].lookPer == "2"){
-		    		dataHtml += '<td style="color:#f00">'+'会员浏览'+'</td>';
-		    	}
-				if(currData[i].state == "1"){
-		    		dataHtml += '<td style="color:green">'+'可借阅'+'</td>';
-		    	}else if(currData[i].state == "2"){
-		    		dataHtml += '<td style="color:blue">'+'已被借阅'+'</td>';
-		    	}else{
-		    		dataHtml += '<td style="color:red">'+'已下架'+'</td>';
-		    	}
-		    	//dataHtml+='<td><input type="checkbox" name="show" lay-skin="switch" lay-text="是|否" lay-filter="isShow"'+currData[i].isShow+'></td>'
-		    	dataHtml+='<td>'+currData[i].createTime+'</td>'
-		    	+'<td>'+currData[i].updateTime+'</td>'
-		    	+'<td>'
-				+  '<a class="layui-btn layui-btn-mini news_edit data-id="'+currData[i].id+'"><i class="iconfont icon-edit"></i>编辑</a>'
-				+  '<a class="layui-btn layui-btn-normal layui-btn-mini news_collect data-id="'+currData[i].id+'"><i class="layui-icon">&#xe600;</i> 收藏</a>'
-				+  '<a class="layui-btn layui-btn-danger layui-btn-mini news_del" data-id="'+currData[i].id+'"><i class="layui-icon">&#xe640;</i> 删除</a>'
-		        +'</td>'
-		    	+'</tr>';
-			}
-		}else{
-			dataHtml = '<tr><td colspan="10">暂无数据</td></tr>';
-		}
-	    return dataHtml;
-	}
 })
