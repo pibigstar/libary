@@ -5,6 +5,7 @@ import java.io.IOException;
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.authc.UsernamePasswordToken;
@@ -16,6 +17,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.alibaba.fastjson.JSON;
+import com.alibaba.fastjson.support.spring.annotation.ResponseJSONP;
 import com.lei.entity.User;
 import com.lei.model.JSONModel;
 import com.lei.service.UserServiceI;
@@ -27,11 +29,19 @@ public class UserController {
 	@Resource
 	private UserServiceI userService;
 	
+	
 	@RequestMapping(params = "login")
-	public void login(User user,HttpServletRequest request,HttpServletResponse response) throws IOException {
+	@ResponseJSONP
+	public JSONModel login(User user,String code,HttpSession httpsession) throws IOException {
 		//return "redirect:toLogin.do";
 		JSONModel j = new JSONModel();
 		
+		String imgCode = (String) httpsession.getAttribute("code");
+		if (!imgCode.equals(code.toUpperCase())) {
+			j.setSuccess(false);
+			j.setMsg("验证码错误！");
+			return j;
+		}
 		//得到当前用户
 		Subject subject = SecurityUtils.getSubject();
 		//通过前台传递过来的用户名和密码生成token
@@ -43,21 +53,73 @@ public class UserController {
 			Session session = subject.getSession();
 			User exitUser = userService.findUserByUserName(user.getUsername());
 			session.setAttribute("user", exitUser);
-			request.setAttribute("userSession", session);
+			session.setAttribute("userSession", session);
 			j.setSuccess(true);
 			j.setMsg("登录成功！");
-			response.getWriter().write(JSON.toJSONString(j));
 		} catch (Exception e) {
 			//登录失败
 			e.printStackTrace();
 			j.setSuccess(false);
 			j.setMsg("用户名或密码错误");
-			response.getWriter().write(JSON.toJSONString(j));
 		}
+		return j;
 	}
+	
+	@RequestMapping(params = "update")
+	@ResponseJSONP
+	public JSONModel updateUser(User user) {
+		JSONModel j = new JSONModel();
+		try {
+			userService.updateUser(user);
+			j.setSuccess(true);
+		} catch (Exception e) {
+			e.printStackTrace();
+			j.setSuccess(false);
+		}
+		return j;
+		
+	}
+	
+	
+	@RequestMapping(params = "changePwd")
+	@ResponseJSONP
+	public JSONModel changePwd(User user,String newPassword) {
+		JSONModel j = new JSONModel();
+		try {
+			User exitUser = userService.getUserById(user.getUserId());
+			String inputPwd = user.getPassword();
+			String sysPwd = exitUser.getPassword();
+			if (!sysPwd.equals(inputPwd)) {
+				j.setSuccess(false);
+				j.setMsg("旧密码输入错误！");
+				return j;
+			}
+			user.setPassword(newPassword);
+			userService.changePwd(user);
+			j.setMsg("密码修改成功");
+			j.setSuccess(true);
+		} catch (Exception e) {
+			e.printStackTrace();
+			j.setMsg(e.getMessage());
+			j.setSuccess(false);
+		}
+		return j;
+		
+	}
+	
 	@RequestMapping(params = "toLogin")
 	public String toLogin() {
 		return "page/login/login";
+	}
+	
+	@RequestMapping(params = "toUserInfo")
+	public String toUserInfo() {
+		return "page/user/userInfo";
+	}
+	
+	@RequestMapping(params = "toChangePwd")
+	public String toChangePwd() {
+		return "page/user/changePwd";
 	}
 
 }

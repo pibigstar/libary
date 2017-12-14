@@ -19,4 +19,23 @@ public class UserServiceImpl implements UserServiceI{
 	public User findUserByUserName(String username) {
 		return userMapper.findUserByUserName(username);
 	}
+
+
+	@Override
+	public void updateUser(User user) {
+		userMapper.updateByPrimaryKeySelective(user);
+	}
+
+
+	@Override
+	public void changePwd(User user) {
+		userMapper.updateByPrimaryKeySelective(user);
+	}
+
+
+	@Override
+	public User getUserById(String id) {
+		
+		return userMapper.selectByPrimaryKey(id);
+	}
 }

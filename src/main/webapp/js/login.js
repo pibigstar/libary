@@ -28,7 +28,7 @@ layui.config({
     	                 location.href = "portal.do?toIndex";
     	             }, 1000);
     			}else{
-    				layer.msg('账号或者密码错误', { icon: 5 });
+    				layer.msg(d.msg, { icon: 5 });
     			}
     		}
     	});

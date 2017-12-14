@@ -10,5 +10,11 @@ public interface UserServiceI {
 	 * @return
 	 */
 	public User findUserByUserName(String username);
+
+	public void updateUser(User user);
+
+	public void changePwd(User user);
+
+	public User getUserById(String id);
 	
 }
