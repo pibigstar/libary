@@ -1,5 +1,7 @@
 package com.lei.service;
 
+import java.util.List;
+
 import com.lei.entity.User;
 
 public interface UserServiceI {
@@ -16,5 +18,7 @@ public interface UserServiceI {
 	public void changePwd(User user);
 
 	public User getUserById(String id);
+
+	public List<User> listUser();
 	
 }

@@ -8,16 +8,19 @@ layui.config({
 
 	//加载页面数据
 	var usersData = '';
-	$.get("../../json/usersList.json", function(data){
-		usersData = data;
-		if(window.sessionStorage.getItem("addUser")){
-			var addUser = window.sessionStorage.getItem("addUser");
-			usersData = JSON.parse(addUser).concat(usersData);
+	
+	$.ajax({
+		url : "user.do?listUser",
+		type : "get",
+		dataType : "json",
+		success : function(d){
+			//更新数据
+			//renderDate(d.data);
+			usersData = d.data;
+			usersList();
 		}
-		//执行加载数据的方法
-		usersList();
-	})
-
+	});
+	
 	//查询
 	$(".search_btn").click(function(){
 		var userArray = [];
@@ -89,7 +92,7 @@ layui.config({
 		var index = layui.layer.open({
 			title : "添加会员",
 			type : 2,
-			content : "addUser.html",
+			content : "addUser.jsp",
 			success : function(layero, index){
 				setTimeout(function(){
 					layui.layer.tips('点击此处返回会员列表', '.layui-layer-setwin .layui-layer-close', {
@@ -177,17 +180,28 @@ layui.config({
 		//渲染数据
 		function renderDate(data,curr){
 			var dataHtml = '';
-			currData = usersData.concat().splice(curr*nums-nums, nums);
+			currData = usersData;
 			if(currData.length != 0){
 				for(var i=0;i<currData.length;i++){
+					var role = '';
+					for(var j=0; j<currData[i].roleSet.length;j++){
+						role += currData[i].roleSet[j].name;
+						role +=",";
+					}
 					dataHtml += '<tr>'
 			    	+  '<td><input type="checkbox" name="checked" lay-skin="primary" lay-filter="choose"></td>'
-			    	+  '<td>'+currData[i].userName+'</td>'
-			    	+  '<td>'+currData[i].userEmail+'</td>'
-			    	+  '<td>'+currData[i].userSex+'</td>'
-			    	+  '<td>'+currData[i].userGrade+'</td>'
-			    	+  '<td>'+currData[i].userStatus+'</td>'
-			    	+  '<td>'+currData[i].userEndTime+'</td>'
+			    	+  '<td>'+currData[i].username+'</td>'
+			    	+  '<td>'+currData[i].email+'</td>'
+			    	+  '<td>'+currData[i].sex+'</td>'
+			    	+  '<td>'+currData[i].phone+'</td>'
+			    	+  '<td>'+currData[i].age+'</td>'
+					+  '<td>'+role+'</td>';
+					if(currData[i].state=="0"||currData[i].state==null){
+						dataHtml+='<td>未激活</td>';
+					}else{
+						dataHtml+='<td>已激活</td>';
+					}
+					dataHtml+='<td>'+currData[i].lastTime+'</td>'
 			    	+  '<td>'
 					+    '<a class="layui-btn layui-btn-mini users_edit"><i class="iconfont icon-edit"></i> 编辑</a>'
 					+    '<a class="layui-btn layui-btn-danger layui-btn-mini users_del" data-id="'+data[i].usersId+'"><i class="layui-icon">&#xe640;</i> 删除</a>'
@@ -195,7 +209,7 @@ layui.config({
 			    	+'</tr>';
 				}
 			}else{
-				dataHtml = '<tr><td colspan="8">暂无数据</td></tr>';
+				dataHtml = '<tr><td colspan="12">暂无数据</td></tr>';
 			}
 		    return dataHtml;
 		}
@@ -204,7 +218,7 @@ layui.config({
 		var nums = 13; //每页出现的数据量
 		laypage({
 			cont : "page",
-			pages : Math.ceil(usersData.length/nums),
+			pages : 10,
 			jump : function(obj){
 				$(".users_content").html(renderDate(usersData,obj.curr));
 				$('.users_list thead input[type="checkbox"]').prop("checked",false);

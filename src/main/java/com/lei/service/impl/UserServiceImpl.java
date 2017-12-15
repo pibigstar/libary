@@ -1,5 +1,7 @@
 package com.lei.service.impl;
 
+import java.util.List;
+
 import javax.annotation.Resource;
 import org.springframework.stereotype.Service;
 
@@ -37,5 +39,11 @@ public class UserServiceImpl implements UserServiceI{
 	public User getUserById(String id) {
 		
 		return userMapper.selectByPrimaryKey(id);
+	}
+
+
+	@Override
+	public List<User> listUser() {
+		return userMapper.listUser();
 	}
 }

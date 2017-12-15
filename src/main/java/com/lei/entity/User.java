@@ -37,7 +37,7 @@ public class User {
     
   //roleSet记得跟UserMapping里面表关联时字段名字相对应
   	private Set<Role> roleSet = new HashSet<Role>();
-
+  	
     public String getUserId() {
         return userId;
     }

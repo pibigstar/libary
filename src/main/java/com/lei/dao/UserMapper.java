@@ -1,5 +1,7 @@
 package com.lei.dao;
 
+import java.util.List;
+
 import com.lei.entity.User;
 
 public interface UserMapper {
@@ -21,4 +23,6 @@ public interface UserMapper {
 	 * @return
 	 */
 	public User findUserByUserName(String username);
+
+	List<User> listUser();
 }

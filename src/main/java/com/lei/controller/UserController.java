@@ -1,6 +1,7 @@
 package com.lei.controller;
 
 import java.io.IOException;
+import java.util.List;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
@@ -19,6 +20,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.support.spring.annotation.ResponseJSONP;
 import com.lei.entity.User;
+import com.lei.model.DataListModel;
 import com.lei.model.JSONModel;
 import com.lei.service.UserServiceI;
 
@@ -107,6 +109,26 @@ public class UserController {
 		
 	}
 	
+	
+	@RequestMapping(params = "listUser")
+	@ResponseJSONP
+	public DataListModel listUser() {
+		DataListModel d = new DataListModel();
+		try {
+			List<User> users = userService.listUser();
+			d.setData(users);
+			System.out.println(users.get(0).getUsername());
+		} catch (Exception e) {
+			e.printStackTrace();
+			d.setMsg(e.getMessage());
+		}
+		return d;
+		
+	}
+	
+	
+	
+	
 	@RequestMapping(params = "toLogin")
 	public String toLogin() {
 		return "page/login/login";
@@ -120,6 +142,11 @@ public class UserController {
 	@RequestMapping(params = "toChangePwd")
 	public String toChangePwd() {
 		return "page/user/changePwd";
+	}
+	
+	@RequestMapping(params = "toListUser")
+	public String toListUser() {
+		return "page/user/listUser";
 	}
 
 }

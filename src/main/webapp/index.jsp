@@ -123,7 +123,7 @@
 						<cite>图书管理</cite></a>
 					</li>
 					<li class="layui-nav-item">
-						<a href="javascript:;" data-url="page/news/newsList.html">
+						<a href="javascript:;" data-url="user.do?toListUser">
 						<i class="iconfont"></i>
 						<cite>用户管理</cite></a>
 					</li>
