@@ -5,6 +5,14 @@ public class DataListModel {
 	private String msg;
 	private int count;
 	private Object data;
+	private Boolean success;
+	
+	public Boolean getSuccess() {
+		return success;
+	}
+	public void setSuccess(Boolean success) {
+		this.success = success;
+	}
 	public int getCode() {
 		return code;
 	}

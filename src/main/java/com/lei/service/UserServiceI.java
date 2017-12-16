@@ -20,5 +20,7 @@ public interface UserServiceI {
 	public User getUserById(String id);
 
 	public List<User> listUser();
+
+	public void addUser(User user,String role);
 	
 }

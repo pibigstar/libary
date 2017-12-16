@@ -90,9 +90,9 @@ layui.config({
 	//添加会员
 	$(".usersAdd_btn").click(function(){
 		var index = layui.layer.open({
-			title : "添加会员",
+			title : "添加用户",
 			type : 2,
-			content : "addUser.jsp",
+			content : "user.do?toAddUser",
 			success : function(layero, index){
 				setTimeout(function(){
 					layui.layer.tips('点击此处返回会员列表', '.layui-layer-setwin .layui-layer-close', {
@@ -176,6 +176,8 @@ layui.config({
 		});
 	})
 
+
+	
 	function usersList(){
 		//渲染数据
 		function renderDate(data,curr){
@@ -215,7 +217,7 @@ layui.config({
 		}
 
 		//分页
-		var nums = 13; //每页出现的数据量
+		var nums = 10; //每页出现的数据量
 		laypage({
 			cont : "page",
 			pages : 10,

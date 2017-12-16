@@ -23,51 +23,69 @@
 <body class="childrenBody">
 	<form class="layui-form" style="width:80%;">
 		<div class="layui-form-item">
-			<label class="layui-form-label">登录名</label>
+			<label class="layui-form-label">用户名</label>
 			<div class="layui-input-block">
-				<input type="text" class="layui-input userName" lay-verify="required" placeholder="请输入登录名">
+				<input name="username" class="layui-input" lay-verify="required" placeholder="请输入登录名">
+			</div>
+		</div>
+		<div class="layui-form-item">
+			<label class="layui-form-label">密码</label>
+			<div class="layui-input-block">
+				<input name="password" type="password" class="layui-input password" lay-verify="required" placeholder="请输入密码">
 			</div>
 		</div>
 		<div class="layui-form-item">
 			<label class="layui-form-label">邮箱</label>
 			<div class="layui-input-block">
-				<input type="text" class="layui-input userEmail" lay-verify="email" placeholder="请输入邮箱">
+				<input name="email" type="text" class="layui-input" lay-verify="email" placeholder="请输入邮箱">
+			</div>
+		</div>
+		<div class="layui-form-item">
+			<label class="layui-form-label">手机号</label>
+			<div class="layui-input-block">
+				<input name="phone" class="layui-input" lay-verify="phone" placeholder="请输入手机号">
 			</div>
 		</div>
 		<div class="layui-form-item">
 			<div class="layui-inline">
 			    <label class="layui-form-label">性别</label>
-			    <div class="layui-input-block userSex">
+			    <div class="layui-input-block">
 			      	<input type="radio" name="sex" value="男" title="男" checked>
 			      	<input type="radio" name="sex" value="女" title="女">
-			      	<input type="radio" name="sex" value="保密" title="保密">
 			    </div>
 		    </div>
 		    <div class="layui-inline">
-			    <label class="layui-form-label">会员等级</label>
+			    <label class="layui-form-label">年龄</label>
 				<div class="layui-input-block">
-					<select name="userGrade" class="userGrade" lay-filter="userGrade">
-						<option value="0">注册会员</option>
-						<option value="1">中级会员</option>
-				        <option value="2">高级会员</option>
-				        <option value="3">超级会员</option>
-				    </select>
+					<input type="number" class="layui-input">
 				</div>
 		    </div>
 		    <div class="layui-inline">
 			    <label class="layui-form-label">会员状态</label>
 				<div class="layui-input-block">
-					<select name="userStatus" class="userStatus" lay-filter="userStatus">
-						<option value="0">正常使用</option>
-						<option value="1">限制用户</option>
+					<select name="state">
+						<option value="0">未激活</option>
+						<option value="1">已激活</option>
+				    </select>
+				</div>
+		    </div>
+		    
+		    <div class="layui-inline">
+			    <label class="layui-form-label">用户角色</label>
+				<div class="layui-input-block">
+					<select name="role" class="userStatus">
+						<option value="1">管理员</option>
+						<option value="2">学生</option>
+						<option value="4">老师</option>
+						<option value="3">游客</option>
 				    </select>
 				</div>
 		    </div>
 		</div>
 		<div class="layui-form-item">
-			<label class="layui-form-label">站点描述</label>
+			<label class="layui-form-label">个性签名</label>
 			<div class="layui-input-block">
-				<textarea placeholder="请输入站点描述" class="layui-textarea linksDesc"></textarea>
+				<textarea name="signature" class="layui-textarea"></textarea>
 			</div>
 		</div>
 		<div class="layui-form-item">

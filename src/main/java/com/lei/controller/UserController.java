@@ -117,7 +117,6 @@ public class UserController {
 		try {
 			List<User> users = userService.listUser();
 			d.setData(users);
-			System.out.println(users.get(0).getUsername());
 		} catch (Exception e) {
 			e.printStackTrace();
 			d.setMsg(e.getMessage());
@@ -126,7 +125,23 @@ public class UserController {
 		
 	}
 	
-	
+	@RequestMapping(params = "addUser")
+	@ResponseJSONP
+	public DataListModel addUser(User user,String role) {
+		DataListModel d = new DataListModel();
+		try {
+			userService.addUser(user,role);
+			d.setMsg("添加用户成功！");
+			d.setSuccess(true);
+		} catch (Exception e) {
+			e.printStackTrace();
+			d.setSuccess(false);
+			d.setMsg("添加用户失败！");
+			d.setMsg(e.getMessage());
+		}
+		return d;
+		
+	}
 	
 	
 	@RequestMapping(params = "toLogin")
@@ -147,6 +162,11 @@ public class UserController {
 	@RequestMapping(params = "toListUser")
 	public String toListUser() {
 		return "page/user/listUser";
+	}
+	
+	@RequestMapping(params = "toAddUser")
+	public String toAddUser() {
+		return "page/user/addUser";
 	}
 
 }
