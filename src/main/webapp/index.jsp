@@ -139,7 +139,7 @@
 					</li>
 					<li class="layui-nav-item">
 						<a href="javascript:;"><i class="layui-icon" data-icon=""></i>
-						<cite>其他页面</cite><span class="layui-nav-more"></span></a>
+						<cite>系统设置</cite><span class="layui-nav-more"></span></a>
 						<dl class="layui-nav-child">
 							<dd><a href="javascript:;" data-url="page/404.html">
 								<i class="layui-icon" data-icon=""></i>
@@ -147,7 +147,7 @@
 							</dd>
 							<dd><a href="javascript:;" data-url="page/login/login.html" target="_blank">
 								<i class="layui-icon" data-icon=""></i>
-								<cite>登录</cite></a>
+								<cite>系统公告</cite></a>
 							</dd>
 						</dl>
 					</li>
