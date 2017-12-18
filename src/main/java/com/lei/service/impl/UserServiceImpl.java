@@ -70,4 +70,10 @@ public class UserServiceImpl implements UserServiceI{
 		userRoleMapper.insert(userRole);
 		userMapper.insertSelective(user);
 	}
+
+
+	@Override
+	public List<User> findUserByName(String username) {
+		return userMapper.findUserByName(username);
+	}
 }

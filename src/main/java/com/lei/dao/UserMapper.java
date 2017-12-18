@@ -25,4 +25,6 @@ public interface UserMapper {
 	public User findUserByUserName(String username);
 
 	List<User> listUser();
+
+	List<User> findUserByName(String username);
 }

@@ -125,6 +125,23 @@ public class UserController {
 		
 	}
 	
+	@RequestMapping(params = "searchUser")
+	@ResponseJSONP
+	public DataListModel searchUser(String username) {
+		DataListModel d = new DataListModel();
+		try {
+			List<User> users = userService.findUserByName(username);
+			d.setSuccess(true);
+			d.setData(users);
+		} catch (Exception e) {
+			e.printStackTrace();
+			d.setSuccess(false);
+			d.setMsg(e.getMessage());
+		}
+		return d;
+		
+	}
+	
 	@RequestMapping(params = "addUser")
 	@ResponseJSONP
 	public DataListModel addUser(User user,String role) {

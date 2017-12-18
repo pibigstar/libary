@@ -24,59 +24,23 @@ layui.config({
 	//查询
 	$(".search_btn").click(function(){
 		var userArray = [];
-		if($(".search_input").val() != ''){
+		var username = $(".search_input").val();
+		if(username != ''){
 			var index = layer.msg('查询中，请稍候',{icon: 16,time:false,shade:0.8});
             setTimeout(function(){
             	$.ajax({
-					url : "../../json/usersList.json",
+					url : "user.do?searchUser",
 					type : "get",
+					data : {"username":username},
 					dataType : "json",
-					success : function(data){
-						if(window.sessionStorage.getItem("addUser")){
-							var addUser = window.sessionStorage.getItem("addUser");
-							usersData = JSON.parse(addUser).concat(data);
+					success : function(d){
+						if(d.success){
+							usersData = d.data;
+							usersList(usersData);
 						}else{
-							usersData = data;
+							layer.msg("查询失败",{icon:5});
 						}
-						for(var i=0;i<usersData.length;i++){
-							var usersStr = usersData[i];
-							var selectStr = $(".search_input").val();
-		            		function changeStr(data){
-		            			var dataStr = '';
-		            			var showNum = data.split(eval("/"+selectStr+"/ig")).length - 1;
-		            			if(showNum > 1){
-									for (var j=0;j<showNum;j++) {
-		            					dataStr += data.split(eval("/"+selectStr+"/ig"))[j] + "<i style='color:#03c339;font-weight:bold;'>" + selectStr + "</i>";
-		            				}
-		            				dataStr += data.split(eval("/"+selectStr+"/ig"))[showNum];
-		            				return dataStr;
-		            			}else{
-		            				dataStr = data.split(eval("/"+selectStr+"/ig"))[0] + "<i style='color:#03c339;font-weight:bold;'>" + selectStr + "</i>" + data.split(eval("/"+selectStr+"/ig"))[1];
-		            				return dataStr;
-		            			}
-		            		}
-		            		//用户名
-		            		if(usersStr.userName.indexOf(selectStr) > -1){
-			            		usersStr["userName"] = changeStr(usersStr.userName);
-		            		}
-		            		//用户邮箱
-		            		if(usersStr.userEmail.indexOf(selectStr) > -1){
-			            		usersStr["userEmail"] = changeStr(usersStr.userEmail);
-		            		}
-		            		//性别
-		            		if(usersStr.userSex.indexOf(selectStr) > -1){
-			            		usersStr["userSex"] = changeStr(usersStr.userSex);
-		            		}
-		            		//会员等级
-		            		if(usersStr.userGrade.indexOf(selectStr) > -1){
-			            		usersStr["userGrade"] = changeStr(usersStr.userGrade);
-		            		}
-		            		if(usersStr.userName.indexOf(selectStr)>-1 || usersStr.userEmail.indexOf(selectStr)>-1 || usersStr.userSex.indexOf(selectStr)>-1 || usersStr.userGrade.indexOf(selectStr)>-1){
-		            			userArray.push(usersStr);
-		            		}
-		            	}
-		            	usersData = userArray;
-		            	usersList(usersData);
+						
 					}
 				})
             	

@@ -68,6 +68,11 @@
     	AND u.username = #{username} 
   </select>
   
+  <select id="findUserByName" parameterType="string" resultMap="UserRoleMap">    
+     <include refid="select-base" />    
+    	AND u.username like concat(concat('%', #{username}), '%')
+  </select>
+  
   <select id="listUser" resultMap="UserRoleMap">    
      <include refid="select-base" />    
   </select>

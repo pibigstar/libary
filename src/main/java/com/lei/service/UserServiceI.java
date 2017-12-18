@@ -22,5 +22,7 @@ public interface UserServiceI {
 	public List<User> listUser();
 
 	public void addUser(User user,String role);
+
+	public List<User> findUserByName(String username);
 	
 }
