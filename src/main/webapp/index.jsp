@@ -128,7 +128,7 @@
 						<cite>用户管理</cite></a>
 					</li>
 					<li class="layui-nav-item">
-						<a href="javascript:;" data-url="page/links/linksList.html">
+						<a href="javascript:;" data-url="link.do?toLink">
 						<i class="layui-icon" data-icon=""></i>
 						<cite>友情链接</cite></a>
 					</li>

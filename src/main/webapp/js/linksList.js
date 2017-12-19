@@ -9,71 +9,38 @@ layui.config({
 	//加载页面数据
 	var linksData = '';
 	$.ajax({
-		url : "../../json/linksList.json",
+		url : "link.do?list",
 		type : "get",
 		dataType : "json",
-		success : function(data){
-			linksData = data;
-			if(window.sessionStorage.getItem("addLinks")){
-				var addLinks = window.sessionStorage.getItem("addLinks");
-				linksData = JSON.parse(addLinks).concat(linksData);
+		success : function(d){
+			if(d.code==0){
+				linksData = d.data;
+				linksList();
+			}else{
+				layer.msg(d.msg,{icon:5});
 			}
-			//执行加载数据的方法
-			linksList();
 		}
 	})
 
 	//查询
 	$(".search_btn").click(function(){
 		var newArray = [];
-		if($(".search_input").val() != ''){
+		var linkName = $(".search_input").val();
+		if(linkName != ''){
 			var index = layer.msg('查询中，请稍候',{icon: 16,time:false,shade:0.8});
             setTimeout(function(){
             	$.ajax({
-					url : "../../json/linksList.json",
+					url : "link.do?list",
 					type : "get",
+					data:{"linkName":linkName},
 					dataType : "json",
-					success : function(data){
-						if(window.sessionStorage.getItem("addLinks")){
-							var addLinks = window.sessionStorage.getItem("addLinks");
-							linksData = JSON.parse(addLinks).concat(data);
+					success : function(d){
+						if(d.code==0){
+							linksData = d.data;
+							linksList();
 						}else{
-							linksData = data;
+							layer.msg(d.msg,{icon:5});
 						}
-						for(var i=0;i<linksData.length;i++){
-							var linksStr = linksData[i];
-							var selectStr = $(".search_input").val();
-		            		function changeStr(data){
-		            			var dataStr = '';
-		            			var showNum = data.split(eval("/"+selectStr+"/ig")).length - 1;
-		            			if(showNum > 1){
-									for (var j=0;j<showNum;j++) {
-		            					dataStr += data.split(eval("/"+selectStr+"/ig"))[j] + "<i style='color:#03c339;font-weight:bold;'>" + selectStr + "</i>";
-		            				}
-		            				dataStr += data.split(eval("/"+selectStr+"/ig"))[showNum];
-		            				return dataStr;
-		            			}else{
-		            				dataStr = data.split(eval("/"+selectStr+"/ig"))[0] + "<i style='color:#03c339;font-weight:bold;'>" + selectStr + "</i>" + data.split(eval("/"+selectStr+"/ig"))[1];
-		            				return dataStr;
-		            			}
-		            		}
-		            		//网站名称
-		            		if(linksStr.linksName.indexOf(selectStr) > -1){
-			            		linksStr["linksName"] = changeStr(linksStr.linksName);
-		            		}
-		            		//网站地址
-		            		if(linksStr.linksUrl.indexOf(selectStr) > -1){
-			            		linksStr["linksUrl"] = changeStr(linksStr.linksUrl);
-		            		}
-		            		//
-		            		if(linksStr.showAddress.indexOf(selectStr) > -1){
-			            		linksStr["showAddress"] = changeStr(linksStr.showAddress);
-		            		}
-		            		if(linksStr.linksName.indexOf(selectStr)>-1 || linksStr.linksUrl.indexOf(selectStr)>-1 || linksStr.showAddress.indexOf(selectStr)>-1){
-		            			newArray.push(linksStr);
-		            		}
-		            	}
-		            	linksData = newArray;
 		            	linksList(linksData);
 					}
 				})
@@ -188,11 +155,11 @@ layui.config({
 				for(var i=0;i<currData.length;i++){
 					dataHtml += '<tr>'
 			    	+'<td><input type="checkbox" name="checked" lay-skin="primary" lay-filter="choose"></td>'
-			    	+'<td align="left">'+currData[i].linksName+'</td>'
-			    	+'<td><a style="color:#1E9FFF;" target="_blank" href="'+currData[i].linksUrl+'">'+currData[i].linksUrl+'</a></td>'
-			    	+'<td>'+currData[i].masterEmail+'</td>'
-			    	+'<td>'+currData[i].linksTime+'</td>'
-			    	+'<td>'+currData[i].showAddress+'</td>'
+			    	+'<td align="left">'+currData[i].linkName+'</td>'
+			    	+'<td><a style="color:#1E9FFF;" target="_blank" href="'+currData[i].linkUrl+'">'+currData[i].linkUrl+'</a></td>'
+			    	+'<td>'+currData[i].linkEmail+'</td>'
+			    	+'<td>'+currData[i].createTime+'</td>'
+			    	+'<td>'+currData[i].showLocation+'</td>'
 			    	+'<td>'
 					+  '<a class="layui-btn layui-btn-mini links_edit"><i class="iconfont icon-edit"></i> 编辑</a>'
 					+  '<a class="layui-btn layui-btn-danger layui-btn-mini links_del" data-id="'+data[i].linksId+'"><i class="layui-icon">&#xe640;</i> 删除</a>'
