@@ -8,4 +8,6 @@ public interface NoticeServiceI {
 	
 	public Notice get();
 
+	public void update(Notice notice);
+
 }

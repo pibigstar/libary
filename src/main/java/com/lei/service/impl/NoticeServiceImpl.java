@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 import com.lei.dao.NoticeMapper;
 import com.lei.entity.Notice;
 import com.lei.service.NoticeServiceI;
+import com.sun.tools.corba.se.idl.constExpr.Not;
 
 @Service("noticeService")
 public class NoticeServiceImpl implements NoticeServiceI{
@@ -17,6 +18,11 @@ public class NoticeServiceImpl implements NoticeServiceI{
 	@Override
 	public Notice get() {
 		return noticeMapper.selectByPrimaryKey(1);
+	}
+
+	@Override
+	public void update(Notice notice) {
+		noticeMapper.updateByPrimaryKeySelective(notice);
 	}
 	
 }

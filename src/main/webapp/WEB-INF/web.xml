@@ -4,6 +4,15 @@
   <welcome-file-list>
     <welcome-file>jump.jsp</welcome-file>
   </welcome-file-list>
+  <error-page>
+    <error-code>404</error-code>
+    <location>/page/404.jsp</location>
+  </error-page>
+  <error-page>
+    <error-code>500</error-code>
+    <location>/page/error.jsp</location>
+ </error-page>
+  
     <!-- shiro过滤器定义 -->
 	<filter>  
 	    <filter-name>shiroFilter</filter-name>  

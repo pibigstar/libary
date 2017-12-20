@@ -141,11 +141,11 @@
 						<a href="javascript:;"><i class="layui-icon" data-icon=""></i>
 						<cite>系统设置</cite><span class="layui-nav-more"></span></a>
 						<dl class="layui-nav-child">
-							<dd><a href="javascript:;" data-url="page/404.html">
-								<i class="layui-icon" data-icon=""></i>
+							<dd><a href="javascript:;" data-url="page/404.jsp">
+								<i class="layui-icon" data-icon=""></i>
 								<cite>404页面</cite></a>
 							</dd>
-							<dd><a href="javascript:;" data-url="page/login/login.html" target="_blank">
+							<dd><a href="javascript:;" data-url="notice.do?toNotice">
 								<i class="layui-icon" data-icon=""></i>
 								<cite>系统公告</cite></a>
 							</dd>
@@ -174,7 +174,7 @@
 				</ul>
 				<div class="layui-tab-content clildFrame">
 					<div class="layui-tab-item layui-show">
-						<iframe src="page/main.html"></iframe>
+						<iframe src="page/main.jsp"></iframe>
 					</div>
 				</div>
 			</div>
