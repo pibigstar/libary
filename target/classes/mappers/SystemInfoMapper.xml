@@ -1,0 +1,188 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.lei.dao.SystemInfoMapper" >
+  <resultMap id="BaseResultMap" type="com.lei.entity.SystemInfo" >
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="cmsName" property="cmsname" jdbcType="VARCHAR" />
+    <result column="version" property="version" jdbcType="VARCHAR" />
+    <result column="author" property="author" jdbcType="VARCHAR" />
+    <result column="homePage" property="homepage" jdbcType="VARCHAR" />
+    <result column="server" property="server" jdbcType="VARCHAR" />
+    <result column="dataBase" property="database" jdbcType="VARCHAR" />
+    <result column="maxUpload" property="maxupload" jdbcType="VARCHAR" />
+    <result column="userRights" property="userrights" jdbcType="VARCHAR" />
+    <result column="keywords" property="keywords" jdbcType="VARCHAR" />
+    <result column="powerby" property="powerby" jdbcType="VARCHAR" />
+    <result column="description" property="description" jdbcType="VARCHAR" />
+    <result column="record" property="record" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, cmsName, version, author, homePage, server, `dataBase`, maxUpload, userRights, 
+    keywords, powerby, description, record
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from sys_info
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from sys_info
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.lei.entity.SystemInfo" >
+    insert into sys_info (id, cmsName, version, 
+      author, homePage, server, 
+      `dataBase`, maxUpload, userRights, 
+      keywords, powerby, description, 
+      record)
+    values (#{id,jdbcType=INTEGER}, #{cmsname,jdbcType=VARCHAR}, #{version,jdbcType=VARCHAR}, 
+      #{author,jdbcType=VARCHAR}, #{homepage,jdbcType=VARCHAR}, #{server,jdbcType=VARCHAR}, 
+      #{database,jdbcType=VARCHAR}, #{maxupload,jdbcType=VARCHAR}, #{userrights,jdbcType=VARCHAR}, 
+      #{keywords,jdbcType=VARCHAR}, #{powerby,jdbcType=VARCHAR}, #{description,jdbcType=VARCHAR}, 
+      #{record,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.lei.entity.SystemInfo" >
+    insert into sys_info
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="cmsname != null" >
+        cmsName,
+      </if>
+      <if test="version != null" >
+        version,
+      </if>
+      <if test="author != null" >
+        author,
+      </if>
+      <if test="homepage != null" >
+        homePage,
+      </if>
+      <if test="server != null" >
+        server,
+      </if>
+      <if test="database != null" >
+        `dataBase`,
+      </if>
+      <if test="maxupload != null" >
+        maxUpload,
+      </if>
+      <if test="userrights != null" >
+        userRights,
+      </if>
+      <if test="keywords != null" >
+        keywords,
+      </if>
+      <if test="powerby != null" >
+        powerby,
+      </if>
+      <if test="description != null" >
+        description,
+      </if>
+      <if test="record != null" >
+        record,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="cmsname != null" >
+        #{cmsname,jdbcType=VARCHAR},
+      </if>
+      <if test="version != null" >
+        #{version,jdbcType=VARCHAR},
+      </if>
+      <if test="author != null" >
+        #{author,jdbcType=VARCHAR},
+      </if>
+      <if test="homepage != null" >
+        #{homepage,jdbcType=VARCHAR},
+      </if>
+      <if test="server != null" >
+        #{server,jdbcType=VARCHAR},
+      </if>
+      <if test="database != null" >
+        #{database,jdbcType=VARCHAR},
+      </if>
+      <if test="maxupload != null" >
+        #{maxupload,jdbcType=VARCHAR},
+      </if>
+      <if test="userrights != null" >
+        #{userrights,jdbcType=VARCHAR},
+      </if>
+      <if test="keywords != null" >
+        #{keywords,jdbcType=VARCHAR},
+      </if>
+      <if test="powerby != null" >
+        #{powerby,jdbcType=VARCHAR},
+      </if>
+      <if test="description != null" >
+        #{description,jdbcType=VARCHAR},
+      </if>
+      <if test="record != null" >
+        #{record,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.lei.entity.SystemInfo" >
+    update sys_info
+    <set >
+      <if test="cmsname != null" >
+        cmsName = #{cmsname,jdbcType=VARCHAR},
+      </if>
+      <if test="version != null" >
+        version = #{version,jdbcType=VARCHAR},
+      </if>
+      <if test="author != null" >
+        author = #{author,jdbcType=VARCHAR},
+      </if>
+      <if test="homepage != null" >
+        homePage = #{homepage,jdbcType=VARCHAR},
+      </if>
+      <if test="server != null" >
+        server = #{server,jdbcType=VARCHAR},
+      </if>
+      <if test="database != null" >
+        `dataBase` = #{database,jdbcType=VARCHAR},
+      </if>
+      <if test="maxupload != null" >
+        maxUpload = #{maxupload,jdbcType=VARCHAR},
+      </if>
+      <if test="userrights != null" >
+        userRights = #{userrights,jdbcType=VARCHAR},
+      </if>
+      <if test="keywords != null" >
+        keywords = #{keywords,jdbcType=VARCHAR},
+      </if>
+      <if test="powerby != null" >
+        powerby = #{powerby,jdbcType=VARCHAR},
+      </if>
+      <if test="description != null" >
+        description = #{description,jdbcType=VARCHAR},
+      </if>
+      <if test="record != null" >
+        record = #{record,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.lei.entity.SystemInfo" >
+    update sys_info
+    set cmsName = #{cmsname,jdbcType=VARCHAR},
+      version = #{version,jdbcType=VARCHAR},
+      author = #{author,jdbcType=VARCHAR},
+      homePage = #{homepage,jdbcType=VARCHAR},
+      server = #{server,jdbcType=VARCHAR},
+      `dataBase` = #{database,jdbcType=VARCHAR},
+      maxUpload = #{maxupload,jdbcType=VARCHAR},
+      userRights = #{userrights,jdbcType=VARCHAR},
+      keywords = #{keywords,jdbcType=VARCHAR},
+      powerby = #{powerby,jdbcType=VARCHAR},
+      description = #{description,jdbcType=VARCHAR},
+      record = #{record,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>

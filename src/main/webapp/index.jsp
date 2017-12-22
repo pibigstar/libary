@@ -133,7 +133,7 @@
 						<cite>友情链接</cite></a>
 					</li>
 					<li class="layui-nav-item">
-						<a href="javascript:;" data-url="page/systemParameter/systemParameter.html">
+						<a href="javascript:;" data-url="sysInfo.do?toSysInfo">
 						<i class="layui-icon" data-icon=""></i>
 						<cite>系统基本参数</cite></a>
 					</li>
