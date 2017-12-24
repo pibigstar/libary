@@ -37,64 +37,64 @@
 		    	<tr>
 		    		<td>模版名称</td>
 		    		<td>
-		    		<input type="text" class="layui-input cmsName" value="${sysInfo.cmsname }" lay-verify="required" placeholder="请输入模版名称">
-		    		<input type="hidden" value="${sysInfo.id }" class="layui-input id">
+		    		<input name="cmsname" class="layui-input cmsName" value="${sysInfo.cmsname }" lay-verify="required" placeholder="请输入模版名称">
+		    		<input type="hidden" name="id" value="${sysInfo.id }" class="layui-input id">
 		    		</td>
 		    		<td>cmsName</td>
 		    	</tr>
 		    	<tr>
 		    		<td>当前版本</td>
-		    		<td><input type="text" class="layui-input version" value="${sysInfo.version }" placeholder="请输入当前模版版本"></td>
+		    		<td><input name="version" class="layui-input version" value="${sysInfo.version }" placeholder="请输入当前模版版本"></td>
 		    		<td>version</td>
 		    	</tr>
 		    	<tr>
 		    		<td>开发作者</td>
-		    		<td><input type="text" class="layui-input author" value="${sysInfo.author }"  placeholder="请输入开发作者"></td>
+		    		<td><input name="author" class="layui-input author" value="${sysInfo.author }"  placeholder="请输入开发作者"></td>
 		    		<td>author</td>
 		    	</tr>
 		    	<tr>
 		    		<td>网站首页</td>
-		    		<td><input type="text" class="layui-input homePage" value="${sysInfo.homepage }"  placeholder="请输入网站首页"></td>
+		    		<td><input name="homepage" class="layui-input homePage" value="${sysInfo.homepage }"  placeholder="请输入网站首页"></td>
 		    		<td>homePage</td>
 		    	</tr>
 		    	<tr>
 		    		<td>服务器环境</td>
-		    		<td><input type="text" class="layui-input server" value="${sysInfo.server }" placeholder="请输入服务器环境"></td>
+		    		<td><input name="server" class="layui-input server" value="${sysInfo.server }" placeholder="请输入服务器环境"></td>
 		    		<td>server</td>
 		    	</tr>
 		    	<tr>
 		    		<td>数据库版本</td>
-		    		<td><input type="text" class="layui-input dataBase" value="${sysInfo.database }" placeholder="请输入数据库版本"></td>
+		    		<td><input name="database" class="layui-input dataBase" value="${sysInfo.database }" placeholder="请输入数据库版本"></td>
 		    		<td>dataBase</td>
 		    	</tr>
 		    	<tr>
 		    		<td>最大上传限制</td>
-		    		<td><input type="text" class="layui-input maxUpload" value="${sysInfo.maxupload }" placeholder="请输入最大上传限制"></td>
+		    		<td><input name="maxupload" class="layui-input maxUpload" value="${sysInfo.maxupload }" placeholder="请输入最大上传限制"></td>
 		    		<td>maxUpload</td>
 		    	</tr>
 		    	<tr>
 		    		<td>用户权限</td>
-		    		<td><input type="text" class="layui-input userRights" value="${sysInfo.userrights }" placeholder="请输入当前用户权限"></td>
+		    		<td><input name="userrights" class="layui-input userRights" value="${sysInfo.userrights }" placeholder="请输入当前用户权限"></td>
 		    		<td>userRights</td>
 		    	</tr>
 		    	<tr>
 		    		<td>默认关键字</td>
-		    		<td><input type="text" class="layui-input keywords" value="${sysInfo.keywords }" placeholder="请输入默认关键字"></td>
+		    		<td><input name="keywords" class="layui-input keywords" value="${sysInfo.keywords }" placeholder="请输入默认关键字"></td>
 		    		<td>keywords</td>
 		    	</tr>
 		    	<tr>
 		    		<td>版权信息</td>
-		    		<td><input type="text" class="layui-input powerby" value="${sysInfo.powerby }" placeholder="请输入网站版权信息"></td>
+		    		<td><input name="powerby"  class="layui-input powerby" value="${sysInfo.powerby }" placeholder="请输入网站版权信息"></td>
 		    		<td>powerby</td>
 		    	</tr>
 		    	<tr>
 		    		<td>网站描述</td>
-		    		<td><textarea placeholder="请输入网站描述" class="layui-textarea description">${sysInfo.description }</textarea></td>
+		    		<td><textarea placeholder="请输入网站描述" name="description" class="layui-textarea description">${sysInfo.description }</textarea></td>
 		    		<td>description</td>
 		    	</tr>
 		    	<tr>
 		    		<td>网站备案号</td>
-		    		<td><input type="text" value="${sysInfo.record }" class="layui-input record" placeholder="请输入网站备案号"></td>
+		    		<td><input name="record" value="${sysInfo.record }" class="layui-input record" placeholder="请输入网站备案号"></td>
 		    		<td>record</td>
 		    	</tr>
 		    </tbody>
