@@ -40,4 +40,9 @@ public class FriendLinkController {
 		return "page/links/listLink";
 	}
 	
+	@RequestMapping(params = "toAdd")
+	public String toAddLink() {
+		return "page/links/listAdd";
+	}
+	
 }

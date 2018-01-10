@@ -133,14 +133,15 @@
 						<cite>友情链接</cite></a>
 					</li>
 					<li class="layui-nav-item">
-						<a href="javascript:;" data-url="sysInfo.do?toSysInfo">
-						<i class="layui-icon" data-icon=""></i>
-						<cite>系统基本参数</cite></a>
-					</li>
-					<li class="layui-nav-item">
 						<a href="javascript:;"><i class="layui-icon" data-icon=""></i>
 						<cite>系统设置</cite><span class="layui-nav-more"></span></a>
 						<dl class="layui-nav-child">
+							<dd>
+							<a href="javascript:;" data-url="sysInfo.do?toSysInfo">
+								<i class="layui-icon" data-icon=""></i>
+								<cite>系统基本参数</cite>
+							</a>
+							</dd>
 							<dd><a href="javascript:;" data-url="page/404.jsp">
 								<i class="layui-icon" data-icon=""></i>
 								<cite>404页面</cite></a>
